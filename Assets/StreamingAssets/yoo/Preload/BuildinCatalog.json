@@ -1,0 +1,23 @@
+{
+    "FileVersion": "1.0.0",
+    "PackageName": "Preload",
+    "PackageVersion": "2025-06-12-1111",
+    "Wrappers": [
+        {
+            "BundleGUID": "0a73d416a4cd7ba2e304014748c0fa73",
+            "FileName": "preload_assets_res_preload_hotupdatedll_0a73d416a4cd7ba2e304014748c0fa73.bundle"
+        },
+        {
+            "BundleGUID": "9b7555e356336c15571f80a9ee6d1636",
+            "FileName": "preload_assets_res_preload_uipanel_9b7555e356336c15571f80a9ee6d1636.bundle"
+        },
+        {
+            "BundleGUID": "4c4c0accbcb822c3866f82b81fac7328",
+            "FileName": "preload_share_assets_res_preload_uipanelart_4c4c0accbcb822c3866f82b81fac7328.bundle"
+        },
+        {
+            "BundleGUID": "e142006a171890f235fe2fd7c7bc42e2",
+            "FileName": "preload_unityshaders_e142006a171890f235fe2fd7c7bc42e2.bundle"
+        }
+    ]
+}
