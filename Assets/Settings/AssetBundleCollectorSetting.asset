@@ -107,7 +107,7 @@ MonoBehaviour:
         CollectorType: 0
         AddressRuleName: AddressByFileName
         PackRuleName: PackDirectory
-        FilterRuleName: CollectScene
+        FilterRuleName: CollectAll
         AssetTags: 
         UserData: 
     - GroupName: UIPanel

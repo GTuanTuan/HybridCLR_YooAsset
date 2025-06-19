@@ -26,14 +26,17 @@ public class ThirdCharacterController : MonoBehaviour
     private Vector2 moveInput;
     private bool isGrounded;
     private bool isCursorLocked = true;
+    public bool isLocalPlayer;
     void Awake()
     {
+        //if (!isLocalPlayer) return;
         framingTransposer = vCam.GetCinemachineComponent<CinemachineFramingTransposer>();
         pov = vCam.GetCinemachineComponent<CinemachinePOV>();
         UpdateCursorState();
     }
     void Update()
     {
+        if (!isLocalPlayer) return;
         ApplyGravity();
         Move();
         RotateModel();
@@ -41,6 +44,7 @@ public class ThirdCharacterController : MonoBehaviour
     }
     private void UpdateCursorState()
     {
+        if (!isLocalPlayer) return;
         Cursor.lockState = isCursorLocked ? CursorLockMode.Locked : CursorLockMode.None;
         Cursor.visible = !isCursorLocked;
         if (pov == null) return;
@@ -51,6 +55,7 @@ public class ThirdCharacterController : MonoBehaviour
     }
     private void ApplyGravity()
     {
+        if (!isLocalPlayer) return;
         isGrounded = controller.isGrounded;
         if (isGrounded && verticalVelocity.y < 0)
         {
@@ -63,7 +68,8 @@ public class ThirdCharacterController : MonoBehaviour
     }
     private void Move()
     {
-        forwardReference.rotation = Quaternion.AngleAxis(pov.m_HorizontalAxis.Value, Vector3.up);
+        if (!isLocalPlayer) return;
+        forwardReference.rotation = Quaternion.AngleAxis(pov.m_HorizontalAxis.Value+transform.eulerAngles.y, Vector3.up);
         Vector3 horizontalMovement = forwardReference.TransformDirection(
             new Vector3(moveInput.x, 0, moveInput.y)) * moveSpeed;
         moveDirection = horizontalMovement + verticalVelocity;
@@ -71,6 +77,7 @@ public class ThirdCharacterController : MonoBehaviour
     }
     private void RotateModel()
     {
+        if (!isLocalPlayer) return;
         if (moveInput == Vector2.zero) return;
         float targetAngle = Mathf.Atan2(moveInput.x, moveInput.y) * Mathf.Rad2Deg;
         Quaternion targetRotation = forwardReference.rotation * Quaternion.AngleAxis(targetAngle, Vector3.up);
@@ -78,14 +85,17 @@ public class ThirdCharacterController : MonoBehaviour
     }
     private void UpdateAnimator()
     {
+        if (!isLocalPlayer) return;
         animator.SetBool("Move", moveInput != Vector2.zero);
     }
     public void OnMove(InputAction.CallbackContext context)
     {
+        if (!isLocalPlayer) return;
         moveInput = context.ReadValue<Vector2>();
     }
     public void OnJump(InputAction.CallbackContext context)
     {
+        if (!isLocalPlayer) return;
         if (context.performed && isGrounded)
         {
             verticalVelocity.y = jumpSpeed;
@@ -93,6 +103,7 @@ public class ThirdCharacterController : MonoBehaviour
     }
     public void OnEsc(InputAction.CallbackContext context)
     {
+        if (!isLocalPlayer) return;
         if (context.performed)
         {
             isCursorLocked = !isCursorLocked;
@@ -109,6 +120,7 @@ public class ThirdCharacterController : MonoBehaviour
     }
     public void OnAlt(InputAction.CallbackContext context)
     {
+        if (!isLocalPlayer) return;
         if (context.performed)
         {
             isCursorLocked = false;
@@ -122,6 +134,7 @@ public class ThirdCharacterController : MonoBehaviour
     }
     public void OnZoom(InputAction.CallbackContext context)
     {
+        if (!isLocalPlayer) return;
         if (framingTransposer == null) return;
         float scrollValue = context.ReadValue<float>();
         float newDistance = framingTransposer.m_CameraDistance + (scrollValue * cameraZoomSpeed * 0.01f);

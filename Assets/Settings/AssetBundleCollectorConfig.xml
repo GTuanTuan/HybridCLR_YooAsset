@@ -21,6 +21,7 @@
     </Group>
     <Group GroupActiveRule="EnableGroup" GroupName="Scene" GroupDesc="" AssetTags="">
       <Collector CollectPath="Assets/Res/Main/Scene" CollectGUID="6070eae1192f2994887f2983a177d503" CollectType="MainAssetCollector" AddressRule="AddressByFileName" PackRule="PackDirectory" FilterRule="CollectScene" UserData="" AssetTags="" />
+      <Collector CollectPath="Assets/Res/Main/SceneArt" CollectGUID="348b52359a598c64c8c62f706cda9186" CollectType="DependAssetCollector" AddressRule="AddressByFileName" PackRule="PackDirectory" FilterRule="CollectAll" UserData="" AssetTags="" />
     </Group>
     <Group GroupActiveRule="EnableGroup" GroupName="UIPanel" GroupDesc="" AssetTags="">
       <Collector CollectPath="Assets/Res/Main/UIPanel" CollectGUID="12d33f33f3a55224c9c747d7bffa1c68" CollectType="MainAssetCollector" AddressRule="AddressByFileName" PackRule="PackDirectory" FilterRule="CollectAll" UserData="" AssetTags="" />

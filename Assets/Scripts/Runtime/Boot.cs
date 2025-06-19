@@ -46,7 +46,7 @@ public class Boot : Singleton<Boot>
         YooAssets.StartOperation(operation);
         yield return operation;
 
-        //加载更新界面
+        //加载更新界面，Main更新流程以及GameStart调用在PatchWindow中
         GameManager.Inst.LoadDll(YooAssets.GetPackage("Preload"), "Preload");
         AssetHandle patchWindowHandle = YooAssets.GetPackage("Preload").LoadAssetAsync<GameObject>("PatchWindow");
         patchWindowHandle.InstantiateAsync(GameManager.Inst.MainUICanvas.transform);

@@ -4,6 +4,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
+using YooAsset;
 
 namespace Mirror
 {
@@ -804,7 +805,7 @@ namespace Mirror
         // Loading a scene manually won't set it.
         public static string networkSceneName { get; protected set; } = "";
 
-        public static AsyncOperation loadingSceneAsync;
+        public static SceneHandle loadingSceneAsync;
 
         /// <summary>Change the server scene and all client's scenes across the network.</summary>
         // Called automatically if onlineScene or offlineScene are set, but it
@@ -844,7 +845,7 @@ namespace Mirror
             // it will be re-enabled in FinishLoadScene.
             NetworkServer.isLoadingScene = true;
 
-            loadingSceneAsync = SceneManager.LoadSceneAsync(newSceneName);
+            loadingSceneAsync = YooAssets.LoadSceneAsync(newSceneName);
 
             // ServerChangeScene can be called when stopping the server
             // when this happens the server is not active so does not need to tell clients about the change
@@ -905,13 +906,13 @@ namespace Mirror
             switch (sceneOperation)
             {
                 case SceneOperation.Normal:
-                    loadingSceneAsync = SceneManager.LoadSceneAsync(newSceneName);
+                    loadingSceneAsync = YooAssets.LoadSceneAsync(newSceneName);
                     break;
                 case SceneOperation.LoadAdditive:
                     // Ensure additive scene is not already loaded on client by name or path
                     // since we don't know which was passed in the Scene message
                     if (!SceneManager.GetSceneByName(newSceneName).IsValid() && !SceneManager.GetSceneByPath(newSceneName).IsValid())
-                        loadingSceneAsync = SceneManager.LoadSceneAsync(newSceneName, LoadSceneMode.Additive);
+                        loadingSceneAsync = YooAssets.LoadSceneAsync(newSceneName, LoadSceneMode.Additive);
                     else
                     {
                         Debug.LogWarning($"Scene {newSceneName} is already loaded");
@@ -924,7 +925,7 @@ namespace Mirror
                     // Ensure additive scene is actually loaded on client by name or path
                     // since we don't know which was passed in the Scene message
                     if (SceneManager.GetSceneByName(newSceneName).IsValid() || SceneManager.GetSceneByPath(newSceneName).IsValid())
-                        loadingSceneAsync = SceneManager.UnloadSceneAsync(newSceneName, UnloadSceneOptions.UnloadAllEmbeddedSceneObjects);
+                        loadingSceneAsync.UnloadAsync();
                     else
                     {
                         Debug.LogWarning($"Cannot unload {newSceneName} with UnloadAdditive operation");
@@ -969,7 +970,7 @@ namespace Mirror
 
         void UpdateScene()
         {
-            if (loadingSceneAsync != null && loadingSceneAsync.isDone)
+            if (loadingSceneAsync != null && loadingSceneAsync.IsDone)
             {
                 //Debug.Log($"ClientChangeScene done readyConn {clientReadyConnection}");
 
@@ -983,7 +984,7 @@ namespace Mirror
                 }
                 finally
                 {
-                    loadingSceneAsync.allowSceneActivation = true;
+                    loadingSceneAsync.Dispose();
                     loadingSceneAsync = null;
                 }
             }

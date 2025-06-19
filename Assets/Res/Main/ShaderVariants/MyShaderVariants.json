@@ -1,6 +1,6 @@
 {
     "ShaderTotalCount": 18,
-    "VariantTotalCount": 27,
+    "VariantTotalCount": 29,
     "ShaderVariantInfos": [
         {
             "AssetPath": "Assets/Res/Main/Shader/SimpleURPToonLitOutlineExample.shader",
@@ -61,7 +61,7 @@
         {
             "AssetPath": "Packages/com.unity.render-pipelines.universal/Shaders/Lit.shader",
             "ShaderName": "Universal Render Pipeline/Lit",
-            "ShaderVariantCount": 3,
+            "ShaderVariantCount": 5,
             "ShaderVariantElements": [
                 {
                     "PassType": 13,
@@ -79,6 +79,27 @@
                         "_REFLECTION_PROBE_BOX_PROJECTION",
                         "_SCREEN_SPACE_OCCLUSION",
                         "_SHADOWS_SOFT"
+                    ]
+                },
+                {
+                    "PassType": 13,
+                    "Keywords": [
+                        "_ADDITIONAL_LIGHT_SHADOWS",
+                        "_ADDITIONAL_LIGHTS",
+                        "_ENVIRONMENTREFLECTIONS_OFF",
+                        "_MAIN_LIGHT_SHADOWS_CASCADE",
+                        "_NORMALMAP",
+                        "_REFLECTION_PROBE_BLENDING",
+                        "_REFLECTION_PROBE_BOX_PROJECTION",
+                        "_SCREEN_SPACE_OCCLUSION",
+                        "_SHADOWS_SOFT",
+                        "_SPECULARHIGHLIGHTS_OFF"
+                    ]
+                },
+                {
+                    "PassType": 13,
+                    "Keywords": [
+                        "_NORMALMAP"
                     ]
                 },
                 {

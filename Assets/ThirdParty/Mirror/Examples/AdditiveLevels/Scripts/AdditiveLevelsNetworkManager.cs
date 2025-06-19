@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using YooAsset;
 
 namespace Mirror.Examples.AdditiveLevels
 {
@@ -81,9 +82,9 @@ namespace Mirror.Examples.AdditiveLevels
             if (mode == NetworkManagerMode.ClientOnly)
             {
                 // Start loading the additive subscene
-                loadingSceneAsync = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
+                loadingSceneAsync = YooAssets.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
 
-                while (loadingSceneAsync != null && !loadingSceneAsync.isDone)
+                while (loadingSceneAsync != null && !loadingSceneAsync.IsDone)
                     yield return null;
             }
 

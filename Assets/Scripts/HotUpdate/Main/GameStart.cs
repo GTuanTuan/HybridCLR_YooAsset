@@ -13,7 +13,7 @@ public class GameStart : MonoBehaviour
     }
     IEnumerator LoadScene()
     {
-        sceneHandle = YooAssets.LoadSceneAsync("Game");
+        sceneHandle = YooAssets.LoadSceneAsync("MirrorRoomOffline");
         sceneHandle.Completed += (handle) =>
         {
             handle.ActivateScene();
